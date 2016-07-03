@@ -1,5 +1,66 @@
+ /* Responsive Design - W3Schools */
+ * { box-sizing: border-box; }
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+[class*="col-"] {
+    float: left;
+    border: 1px solid white;
+    padding: 10px;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
 body {
-	
+	background-color: #111111;
+	background-repeat: none;
+	background-attachment: fixed;
+	font-family: Helvetica, Arial, sans-serif;
+	margin-top: 120px;
+}
+
+header {
+	background-color: #ffffff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 10px;
+}
+
+.content {
+	text-align: center;
+	background-color: white;
+}
+
+.title {
+	float: left;
+}
+
+.units {
+	padding: 10px;
+	font-size: 30px;
+	float: right;
+}
+
+#city {
+	margin: 10px;
+	text-align: center;
 }
 
 /* Temperature Unit Toggle */
@@ -9,6 +70,7 @@ body {
   display: inline-block;
   width: 60px;
   height: 34px;
+  top: 10px;
 }
 
 /* Hide default HTML checkbox */
@@ -22,7 +84,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #c44dff;
   -webkit-transition: .4s;
   transition: .4s;
 }
