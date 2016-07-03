@@ -26,6 +26,13 @@
     display: block;
 }
 
+/* For mobile phones: */
+@media only screen and (max-width: 768px) {
+    [class*="col-"] {
+        width: 100%;
+    }
+}
+
 body {
 	background-color: #111111;
 	background-repeat: none;
@@ -46,6 +53,7 @@ header {
 .content {
 	text-align: center;
 	background-color: white;
+	padding: 16px;
 }
 
 .title {
