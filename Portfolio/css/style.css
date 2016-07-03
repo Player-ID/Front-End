@@ -1,0 +1,103 @@
+/* Basic */
+	body {
+		font-family: Helvetica, Arial, sans-serif;
+		margin: 0;
+		padding: 0;
+	}
+
+/* Desktop/Tablet Version */
+
+	/* About */
+	#about {
+		background-image: url("../img/desktop.jpg");
+    	background-position: center top;
+    	background-repeat: no-repeat;
+    	background-size: cover;
+    	height: 500px;
+    	position: relative;
+    }
+
+	    .profile {
+	    	background: rgba(255, 255, 255, 0.8);
+	    	position: absolute;
+	    	left: 0;
+	    	bottom: 0;
+	    	max-width: 80%;
+	    	color: black;
+	    	padding: 20px;
+	    }
+
+		.profile-image {
+			display: inline-block;
+			background-image: url("../img/sakamoto.jpg");
+	    	background-position: center;
+	    	background-repeat: no-repeat;
+	    	background-size: cover;
+	    	border: 10px solid gray;
+			border-radius: 50%;
+			height: 200px;
+			width: 200px;
+		}
+
+		.basic-info {
+			display: inline-block;
+			vertical-align: top;
+			padding: 20px;
+		}
+
+	/* Showcase */
+	#showcase {}
+
+		.project {
+			margin: 10px;
+			padding: 15px;
+			max-height: 230px;
+			background-color: #fafafa;
+			border: 1px solid #ccc;
+			border-radius: 10px;
+			display: table;
+		}
+
+		.project:hover {
+			background-color: #f5f5f5;
+		}
+
+		.project-thumbnail {
+			display: table-cell;
+			height: 200px;
+			width: 200px;
+			vertical-align: center;
+		}
+
+		.project-details {
+			display: table-cell;
+			position: relative;
+			vertical-align: top;
+			padding-left: 15px;
+		}
+
+		.inner-cell {
+			max-height: 150px;
+			overflow: auto;
+		}
+
+		.button-links {
+			position: absolute;
+			bottom: 0;
+		}
+
+	/* Contact */
+	#contact {
+		background-image: url('../img/startrails.jpg');
+    	background-position: center bottom;
+    	background-repeat: no-repeat;
+    	background-size: cover;
+    	padding: 50px;
+    	color: white;
+    	font-size: 1.3em;
+	}
+
+		#contact input {
+			margin: 10px 0;
+			color: black;
+		}

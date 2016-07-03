@@ -1,0 +1,73 @@
+body {
+	padding: 0;
+	margin: 0;
+	background-color: #e6f2ff;
+	background-image: url("../img/skyline.jpg");
+	background-attachment: fixed;
+	background-repeat: none;
+	background-size: cover;
+	background-position: center;
+	font-family: Helvetica, sans-serif;
+}
+
+a, a:hover, a:visited {
+	color: white;
+}
+
+footer {
+	color: white;
+	padding: 16px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	text-align: left;
+}
+
+.inline {
+	display: inline;
+}
+
+.content {
+	display: block;
+	background-color: #ffffff;
+	position: fixed;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	padding: 16px;
+  	color: #000000;
+  	box-shadow: 10px 10px 10px #222222;
+  	width: 500px;
+  	max-width: 90%;
+}
+
+#quote-text {
+	text-align: center;
+	font-size: 20px;
+}
+
+#quote-origin {
+	text-align: right;
+	font-size: 16px;
+}
+
+.share {
+	margin-left: auto;
+	margin-right: 0;
+}
+
+#twitter {
+	color: #0099ff;
+	float: left;
+}
+	#twitter:hover {
+		color: #00bbff;
+	}
+
+#new-quote {
+	float: right;
+}
+	#new-quote:hover {
+		color: #222222;
+	}

@@ -1,0 +1,8 @@
+../img/sakamoto.jpg
+	http://wallpoper.com/images/00/30/03/28/nichijou-sakamoto_00300328.jpg
+../img/startrails.jpg
+	https://pixabay.com/static/uploads/photo/2014/10/12/12/04/startrails-485598_960_720.jpg
+../img/desktop.jpg
+	https://pixabay.com/static/uploads/photo/2016/04/19/05/07/turntable-1337986_960_720.jpg
+../img/200x200.png
+	http://placehold.it/200x200
