@@ -16,7 +16,6 @@
 
 [class*="col-"] {
     float: left;
-    border: 1px solid white;
     padding: 10px;
 }
 
@@ -35,6 +34,8 @@
 
 body {
 	background-color: #111111;
+	background-image: url("../img/default.jpg");
+	background-size: cover;
 	background-repeat: none;
 	background-attachment: fixed;
 	font-family: Helvetica, Arial, sans-serif;
@@ -69,6 +70,7 @@ header {
 #city {
 	margin: 10px;
 	text-align: center;
+	height: auto;
 }
 
 /* Temperature Unit Toggle */
