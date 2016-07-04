@@ -9,8 +9,8 @@ function getLocation () {
 	$.ajax({
 		url: "http://freegeoip.net/json/",
 		success: function (result) {
-			latitude = result.latitude;
-			longitude = result.longitude;
+			latitude = Math.round(result.latitude);
+			longitude = Math.round(result.longitude);
 			console.log(latitude, longitude);
 			getWeather();
 		}
@@ -18,15 +18,20 @@ function getLocation () {
 }
 
 function getWeather () {
-	var baseUrl = "api.openweathermap.org/data/2.5/weather?APPID=" + openWeatherApiKey;
+	var baseUrl = "http://api.openweathermap.org/data/2.5/weather?";
 	if (longitude != undefined && latitude != undefined) {
-		baseUrl = baseUrl.concat("&lat=" + encodeURI(latitude) + "&lon=" + encodeURI(longitude));
+		baseUrl = baseUrl.concat("lat=" + encodeURI(latitude) + "&lon=" + encodeURI(longitude));
 	}
+	baseUrl = baseUrl.concat("&appid=" + openWeatherApiKey);
 	console.log(baseUrl);
 	$.ajax({
 		url: baseUrl,
-		success: updateData(result),
-		error: errorRetrieving()
+		success: function (result) {
+			updateData(result);
+		},
+		error: function () {
+			errorRetrieving();
+		}
 	});
 }
 
@@ -102,7 +107,7 @@ $(document).ready(function () {
 	console.log("Running JS");
 
 	// Fake data for testing.
-	var result = {
+	/*var result = {
 	    "coord": {
 	        "lon": -0.13,
 	        "lat": 51.51
@@ -146,11 +151,11 @@ $(document).ready(function () {
 	    "name": "London",
 	    "cod": 200
 	}
-	updateData(result);
+	updateData(result);*/
 
 	$("#unitCheck").on("click", function () {
 		updateData(weatherData);
 	});
 	matchHeight();
-	//getLocation();
+	getLocation();
 });
