@@ -48,3 +48,10 @@ input[type=text] {
 input[type=text]:focus {
 	width: 80%;
 }
+
+.content {
+	background-color: white;
+	border-radius: 5px;
+	padding: 16px;
+	margin: 10px;
+}
