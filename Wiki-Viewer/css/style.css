@@ -1,0 +1,70 @@
+body {
+	background-color: #565656;
+	font-family: helvetica;
+	font-size: 16px;
+	box-sizing: border-box;
+}
+
+a {
+	display: block;
+	color: black;
+	text-decoration: none;
+	padding: 16px;
+	margin: 10px;
+}
+
+a:hover,
+a:visited {
+	color:black;
+	background-color: #eeeeee;
+}
+
+#random {
+	width: 150px;
+	text-align: center;
+	margin: auto;
+	color: gray;
+	text-decoration: none;
+	background-color: white;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+#random:hover {
+	color: gray;
+	text-decoration: none;
+	background-color: #eeeeee;
+}
+
+#random:visited {
+	color: gray;
+}
+
+input[type=text] {
+	display: block;
+    width: 200px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url(../img/search-icon.png);
+    background-size: 24px;
+    background-position: 8px 8px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    margin: auto;
+    margin-top: 10px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+	width: 80%;
+}
+
+.content {
+	background-color: white;
+	border-radius: 5px;
+	padding: 16px;
+	margin: 10px;
+}
