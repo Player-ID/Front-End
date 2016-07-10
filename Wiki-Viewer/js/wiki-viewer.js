@@ -13,7 +13,8 @@ function populateResults (result) {
 		var snippet = searchResult[i].extract;
 		var pageId = searchResult[i].pageid;
 
-		var itemTemplate = '<a class="content"><h3>' + title
+		var itemTemplate = '<a href="' + wikiUrl + pageId
+			+ '" target="_blank" class="content"><h3>' + title
 			+ '</h3><p>' + snippet + '</p></a>';
 		newHtml = newHtml.concat(itemTemplate);
 	}
