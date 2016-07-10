@@ -8,10 +8,24 @@
     	<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
    		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>	
    		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+   		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="css/style.css">
 		<script src="js/twitch.js"></script>
 	</head>
 
 	<body>
+		<div class="container">
+			<div class="header">
+				<div id="title-cell"><h1 id="title">What's Up with Twitch</h1></div>
+				<div id="states-cell"><ul id="states">
+					<li id="all"><i class="fa fa-circle"></i> All</li>
+					<li id="online"><i class="fa fa-circle-o"></i> Online</li>
+					<li id="offline"><i class="fa fa-circle-o"></i> Offline</li>
+				</ul></div>
+			</div>
+			<div class="input"><input type="text" name="channel" placeholder="Add a channel..."/></div>	
+			<div id="online-container"></div>
+			<div id="offline-container"></div>
+		</div>
 	</body>
 </html>

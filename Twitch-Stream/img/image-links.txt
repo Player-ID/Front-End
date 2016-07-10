@@ -1,0 +1,2 @@
+../img/plus.png
+	http://www.iconsdb.com/icons/preview/gray/plus-5-xxl.png
