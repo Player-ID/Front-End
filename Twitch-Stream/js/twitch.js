@@ -18,10 +18,10 @@ function getAllChannelData() {
 function getChannelData(channel) {
 	$.getJSON(twitchEndpoint + encodeURI(channel) + "?callback=?", function(data) {
 		// Populate channelInfos
-		if (data.error == "Not Found") {
+		if (data.hasOwnProperty("error")) {
 			offlineChannels.push({
 				"channel": channel,
-				"message": "Channel Not Found",
+				"message": data.message,
 				"category": "error"
 			});
 		} else if (data.stream == null) {

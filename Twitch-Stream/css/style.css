@@ -119,7 +119,8 @@ input[type=text]:focus {
 	background-color: #b3daff;
 }
 
-.offline {
+.offline,
+.error {
 	background-color: #ffb3b3;
 }
 
