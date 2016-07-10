@@ -51,9 +51,8 @@ function populateList() {
 				newHtml = newHtml.concat(generateHtml(onlineChannels[i]));
 			}
 		}
-		if (showCategory == "all" || showCategory == "offline") {
+		if (showCategory == "all" || showCategory == "offline" || showCategory == "error") {
 			for (var i = 0; i < offlineChannels.length; i++) {
-				console.log("Add Offline");
 				newHtml = newHtml.concat(generateHtml(offlineChannels[i]));
 			}
 		}
@@ -63,17 +62,26 @@ function populateList() {
 
 function generateHtml(channelInfo) {
 	var html = "";
-	var channelName = channelInfo.name;
+	var channelName = channelInfo.channel;
 	var channelMessage = channelInfo.message;
 	var channelImage = defaultImage;
 	if (channelInfo.hasOwnProperty("image") && channelInfo.image != "") {
 		channelImage = channelInfo.image;
 	}
+	var channelGame = "";
+	if (channelInfo.hasOwnProperty("game") && channelInfo.image != "") {
+		channelGame = channelInfo.game;
+	}
 
 	html = '<div class="channel ' + channelInfo.category
 	+ '"><div class="image"><img src="' + channelImage
-	+ '" alt="channel image"></div><div class="channel-name"><p>' + channelName
-	+ '</p></div><div><p>' + channelMessage + '</p></div>'
+	+ '" alt="channel image"></div><div class="channel-name"><span>' + channelName
+	+ '</span></div><div class="channel-message"><span>';
+	if (channelGame == "") {
+		html = html + channelMessage + '</span></div></div>';
+	} else {
+		html = html + channelGame + ' : ' + channelMessage + '</span></div></div>';
+	}
 
 	return html;
 }
