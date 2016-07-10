@@ -89,6 +89,20 @@ function generateHtml(channelInfo) {
 $(document).ready(function() {
 	getAllChannelData();
 
+	// Display category
+	$('#all').on('click', function() {
+		showCategory = "all";
+		populateList();
+	});
+	$('#online').on('click', function() {
+		showCategory = "online";
+		populateList();
+	});
+	$('#offline').on('click', function() {
+		showCategory = "offline";
+		populateList();
+	});
+
 	// Set up add channel functionality
 	$('#add-channel').keyup(function(e) {
 	    if(e.keyCode == 13) {
