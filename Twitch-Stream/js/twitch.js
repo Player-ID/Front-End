@@ -112,7 +112,14 @@ $(document).ready(function() {
 	$('#add-channel').bind("enterKey",function(e) {
 		var newChannel = $('#add-channel').val();
 		if (newChannel != '') {
-			channels.push(newChannel);
+			var exists = false;
+			// Only add if it is not already in the list
+			for (var i = 0; i < channels.length; i++) {
+				if (channels[i] == newChannel);
+			}
+			if (exists == false) {
+				channels.push(newChannel);
+			}
 			getAllChannelData(newChannel);
 		}
 	});
