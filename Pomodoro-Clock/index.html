@@ -16,17 +16,17 @@
     <div class="option-wrapper">
       <div class="option">
         <div class="title">Break Time</div>
-        <div class="time-select"><div class="decrease">-</div><div class="length">1</div><div class="increase">+</div></div>
+        <div class="time-select"><div class="decrease" id="decrease-break">-</div><div class="length" id="break-length">5</div><div class="increase" id="increase-break">+</div></div>
       </div>
       <div class="option">
         <div class="title">Work Time</div>
-        <div class="time-select"><div class="decrease">-</div><div class="length">1</div><div class="increase">+</div></div>
+        <div class="time-select"><div class="decrease" id="decrease-work">-</div><div class="length" id="work-length">25</div><div class="increase" id="increase-work">+</div></div>
       </div>
     </div>
-    <canvas id="timer-canvas"></canvas>
+    <div class="canvas-wrapper"><canvas id="timer-canvas" width="1000px" height="400px"></canvas></div>
     <div class="button-wrapper">
-      <button class="button green-button">START</button>
-      <button class="button red-button">STOP</button>
+      <button class="button green-button" id="start">START</button>
+      <button class="button red-button" id="stop">STOP</button>
     </div>
   </body>
 </html>
