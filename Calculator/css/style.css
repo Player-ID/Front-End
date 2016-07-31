@@ -1,0 +1,97 @@
+body {
+	background-color: #0066ff;
+	background-position: center;
+	background-size: cover;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+.calculator {
+	width: 370px;
+	background-color: #e0e0d1;
+	border: 1px solid #b3b3b3;
+	border-bottom: 10px solid #b3b3b3;
+	border-radius: 5px;
+	box-shadow: 0px 10px 35px 0px rgba(0,0,0,0.75);
+	margin: auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#screen {
+	width: 320px;
+	height: 100px;
+	margin: 15px 22px 10px 22px;
+	background-color: #737373;
+	border: 3px solid #595959;
+	border-top: 8px solid #595959;
+	border-bottom: 1px solid #595959;
+	font-family: 'Unica One', Arial, sans-serif;
+	color: #00e600;
+	text-align: right;
+	overflow: hidden;
+}
+
+#input {
+	height: 55px;
+	font-size: 50px;
+	margin-bottom: 5px;
+	text-align: right;
+	overflow: hidden;
+}
+
+#log {
+	height: 35px;
+	font-size: 25px;
+	text-align: right;
+}
+
+#buttons {
+	width: 320px;
+	margin: auto;
+	margin-bottom: 20px;
+}
+
+.button {
+	display: inline-block;
+	font-family: 'Electrolize', Arial, sans-serif;
+	font-size: 20px;
+	width: 74px;
+	height: 30px;
+	background-color: #85adad;
+	text-align: center;
+	padding: 5px 0px;
+	margin: 3px;
+	border-bottom: 5px solid #5c8a8a;
+}
+
+.button:hover {
+	box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+}
+
+.button:active {
+	border-bottom: none !important;
+	transform: translateY(5px) !important;
+}
+
+.vertical {
+	height: 81px;
+}
+
+.horizontal {
+	width: 154px;
+}
+
+#clear-all,
+#clear-entry {
+	color: white;
+	background-color: #ff1a1a;
+	border-bottom: 5px solid #cc0000;
+}
+
+#equal {
+	float: right;
+}
