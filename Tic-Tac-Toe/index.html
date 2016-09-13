@@ -6,6 +6,7 @@
     <meta name="keywords" content="tic, tac, toe, game, PlayerID" />
     <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/game.js"></script>
@@ -32,5 +33,25 @@
     <div class="score-wrapper">
         <div class="score" id="player-one-score">Player 1:<hr>0</div>
         <div class="score" id="player-two-score">Player 2:<hr>0</div>
+    </div>
+
+    <div id="settings-container"></div>
+    <div id="settings">
+        <h1 id="title">Tic Tac Toe</h1>
+        <div class="option" id="players-option">
+            <p class="option-name">Players</p>
+            <label class="switch" id="players">
+                <input type="checkbox" id="isTwoPlayer">
+                <div class="slider"></div>
+            </label>
+        </div>
+        <div class="option" id="symbol-option">
+            <p class="option-name">Play As</p>
+            <label class="switch" id="symbol">
+                <input type="checkbox">
+                <div class="slider"></div>
+            </label>
+        </div>
+        <button id="play-button">PLAY!</button>
     </div>
 </body>

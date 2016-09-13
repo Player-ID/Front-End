@@ -6,7 +6,136 @@ body {
     background-color: #5633FE;
 }
 
+/*===============================
+Settings UI
+===============================*/
+#settings-container {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 2000;
+    background-color: black;
+    opacity: 0.8;
+}
+
+#settings {
+    z-index: 2001;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    width: 350px;
+    height: 400px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+}
+
+#title {
+    text-align: center;
+    background-color: #BBBBBB;
+    margin: 0;
+}
+
+.option {
+    margin-bottom: 10px;
+}
+
+.option-name {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: block;
+  width: 100px;
+  height: 50px;
+  margin: auto;
+}
+
+/* Hide default HTML checkbox */
+.switch input { display:none; }
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  text-align: center;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  height: 42px;
+  line-height: 42px;
+  vertical-align: middle;
+  width: 46px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #EEEEEE;
+  transition: .4s;
+}
+
+#players .slider:before {
+    content: "1";
+}
+
+#symbol .slider:before {
+    content: "X";
+}
+
+#players input:checked + .slider:before {
+  transform: translateX(46px);
+  content: "2";
+}
+
+#symbol input:checked + .slider:before {
+  transform: translateX(46px);
+  content: "O";
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+#play-button {
+    background-color: #BBBBBB;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    width: 100%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+#play-button:hover {
+    background-color: #BBBBBB;
+}
+
+/*===============================
+Game UI
+===============================*/
 .outer-border {
+    z-index: 500;
     width: 470px;
     height: 470px;
     position: absolute;
@@ -14,6 +143,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #EDC75C;
+    border-radius: 5px;
     box-shadow: 2px 3px 4px 2px rgba(0,0,0,0.75),
             inset -2px -2px 5px 3px rgba(0,0,0,0.5);
 }
@@ -36,7 +166,7 @@ body {
     z-index: 0;
 }
 
-.tilewrapper {
+.tiles-wrapper {
     position: absolute;
     z-index: 1000;
 }
@@ -45,6 +175,11 @@ body {
     width: 140px;
     height:140px;
     display: inline-block;
+}
+
+.tile:hover {
+    background-color: #000000;
+    opacity: 0.2;
 }
 
 #player-one-turn {
@@ -75,10 +210,10 @@ body {
 
 .score-wrapper {
     position: absolute;
-    top: 77%;
+    top: 80%;
     left: 50%;
     transform: translateX(-50%);
-    width: 260px;
+    width: 247px;
     height: 100px;
     margin: auto;
 }

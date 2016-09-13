@@ -7,6 +7,20 @@ $(document).ready(function() {
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
     drawBoard();
+
+    $('#play-button').click(function() {
+        $('#settings-container').animate({
+            opacity: 0
+        }, 500);
+
+        $('#settings').animate({
+            top: '-50%'
+        }, 500);
+    });
+
+    $('#players').click(function() {
+        $('#symbol-option').toggle(!($('#isTwoPlayer').is(':checked')));
+    })
 })
 
 function drawBoard() {
