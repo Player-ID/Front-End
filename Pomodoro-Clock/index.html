@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pomodoro!</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Take a break... Have a K... Wait..." />
+    <meta name="keywords" content="pomodoro, clock, rest, schedule" />
+      <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/clock.js"></script>
+  </head>
+
+  <body>
+    <div class="option-wrapper">
+      <div class="option">
+        <div class="title">Break Time</div>
+        <div class="time-select"><div class="decrease" id="decrease-break">-</div><div class="length" id="break-length">5</div><div class="increase" id="increase-break">+</div></div>
+      </div>
+      <div class="option">
+        <div class="title">Work Time</div>
+        <div class="time-select"><div class="decrease" id="decrease-work">-</div><div class="length" id="work-length">25</div><div class="increase" id="increase-work">+</div></div>
+      </div>
+    </div>
+    <div class="canvas-wrapper"><canvas id="timer-canvas" width="1000px" height="400px"></canvas></div>
+    <div class="button-wrapper">
+      <button class="button green-button" id="start">START</button>
+      <button class="button red-button" id="stop">STOP</button>
+    </div>
+  </body>
+</html>

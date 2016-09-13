@@ -1,0 +1,77 @@
+body {
+    background-color: gray;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+}
+
+.option-wrapper {
+    width: 400px;
+    margin: auto;
+}
+
+.option {
+    display: inline-block;
+    width: 180px;
+}
+
+.time-select {
+    display: inline-block;
+    width: 85px;
+    margin: 0px 40px;
+}
+
+.decrease,
+.increase {
+    display: inline-block;
+    width: 10px;
+    margin: auto;
+}
+
+.length {
+    display: inline-block;
+    width: 60px;
+    height: 40px;
+    margin: 5px 0px;
+    text-align: center;
+}
+
+.canvas-wrapper {
+    border-top: 10px solid red;
+    width: 1000px;
+    height: 400px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#timer-canvas {
+    background-color: white;
+}
+
+.button-wrapper {
+    margin: auto;
+    width: 450px;
+}
+
+.button {
+    background-color: white;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    width: 192px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.green-button {
+    background-color: #4CAF50;
+}
+
+.red-button {
+    background-color: #DD0000;
+}
