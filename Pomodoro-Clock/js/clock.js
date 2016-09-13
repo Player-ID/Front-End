@@ -1,6 +1,6 @@
 var canvas;
 var context;
-var time = "Ready!";
+var time = "25:00";
 var intervalTimer;
 var breakMode = false;
 var breakLength = 5;
@@ -21,28 +21,54 @@ function tickTime() {
         time = String(minute) + ":" + String(second);
     }
 
-    if (minute != 0 || second != 0) {
+    if (minute >= 0 && second >= 0) {
         drawTime();
     } else {
         if (!breakMode) {
-            minute = breakLength;
-            second = 0;
-            drawTime();
-        } else {
-            time = "Ready!";
-            drawTime();
             stopTimer();
+            breakMode = true;
+            drawText("Period Ended!\nHit START.");
+        } else {
+            stopTimer();
+            breakMode = false;
+            drawText("Ready!");
         }
     }
 }
 
 function drawTime() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+
+    var height = computeHeight();
+    context.fillStyle = "#7EC0EE"
+    context.fillRect(0, canvas.height - height, canvas.width, height);
+
     context.font = "100px Helvetica";
     context.fillStyle = "black";
     context.textAlign = "center";
     context.textBaseline = "middle";
-    context.fillText(time, canvas.width / 2, canvas.height / 2); 
+    context.fillText(time, canvas.width / 2, canvas.height / 2);
+}
+
+function drawText(text) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.font = "50px Helvetica";
+    context.fillStyle = "black";
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText(text, canvas.width / 2, canvas.height / 2);
+}
+
+function computeHeight() {
+    var totalLength;
+    if (breakMode) {
+        totalLength = breakLength;
+    } else {
+        totalLength = workLength;
+    }
+    return canvas.height *
+                (60 * (totalLength - minute - 1) + (60 - second)) /
+                (60 * totalLength);
 }
 
 function startTimer() {
@@ -66,7 +92,7 @@ function stopTimer() {
 $(document).ready(function() {
     canvas = document.getElementById("timer-canvas");
     context = canvas.getContext("2d");
-    drawTime();
+    drawText("Ready!");
 
     $('#start').on("click", function() {
         startTimer();
