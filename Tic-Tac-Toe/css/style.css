@@ -7,7 +7,7 @@ body {
 }
 
 /*===============================
-Settings UI
+Menu and Settings UI
 ===============================*/
 #settings-container {
     position: absolute;
@@ -114,7 +114,7 @@ input:focus + .slider {
   box-shadow: 0 0 1px #2196F3;
 }
 
-#play-button {
+#play-button, #continue-button {
     background-color: #BBBBBB;
     border: none;
     padding: 15px 32px;
@@ -127,8 +127,23 @@ input:focus + .slider {
     margin-top: 40px;
 }
 
-#play-button:hover {
+#play-button:hover, #continue-button:hover {
     background-color: #BBBBBB;
+}
+
+#message-container {
+    z-index: 2001;
+    background-color: white;
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    width: 300px;
+    height: 150px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    text-align: center;
 }
 
 /*===============================
@@ -175,11 +190,17 @@ Game UI
     width: 140px;
     height:140px;
     display: inline-block;
+    text-align: center;
+    line-height: 140px;
+    vertical-align: center;
+    font-size: 120px;
+    color: white;
+    overflow: hidden;
 }
 
 .tile:hover {
     background-color: #000000;
-    opacity: 0.2;
+    opacity: 0.6;
 }
 
 #player-one-turn {
