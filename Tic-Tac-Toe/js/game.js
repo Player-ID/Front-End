@@ -1,3 +1,5 @@
+// REQUIRES MINIMAX.JS
+
 var canvas;
 var context;
 var game = {
@@ -57,6 +59,14 @@ var game = {
         // Make move. Return false if move cannot be made.
         if (this.gameboard[position] != "0" || this.currentTurn == "0") {
             return false;
+        }
+
+        // No move can be made while computer is thinking.
+        if (this.isSinglePlayer) {
+            if ((this.isPlayerOne && this.currentTurn != "1") ||
+                    (!this.isPlayerOne && this.currentTurn != "2")) {
+                return false;
+            }
         }
 
         if (this.currentTurn == "1") {
@@ -169,17 +179,43 @@ function updateBoard(position) {
     $(tile).text(symbol);
 }
 
+function clearBoard() {
+    for (var i = 0; i < 9; i++) {
+        var tile = "#tile-" + i;
+        $(tile).text("");
+    }
+    game.resetBoard();
+}
+
 function showScore() {
     $('#player-one-score').html('Player 1:<hr>' + game.playerOneScore);
     $('#player-two-score').html('Player 2:<hr>' + game.playerTwoScore);
 }
 
+function cpuTurn() {
+    // Determine if CPU needs to make the next move.
+    if (game.isSinglePlayer) {
+        if ((game.isPlayerOne && game.currentTurn != "1") ||
+                (!game.isPlayerOne && game.currentTurn != "2")) {
+            var move = getBestMove(game.gameboard, game.currentTurn);
+            if (game.currentTurn == "1") {
+                game.gameboard[move] = "1";
+            } else {
+                game.gameboard[move] = "2";
+            }
+            updateBoard(move);
+            game.spacesFilled++;
+            game.endTurn();
+        }
+    }
+}
+
 function highlightTurn() {
     // Slide out the sign for curent turn.
-    if (game.currentTurn == "1" && game.isPlayerOne) {
+    if (game.currentTurn == "1") {
         $('#player-one-turn').animate({
             left: '50%'
-        }, 200);
+        }, 200, cpuTurn);
 
         $('#player-two-turn').animate({
             right: '75%'
@@ -191,7 +227,7 @@ function highlightTurn() {
 
         $('#player-two-turn').animate({
             right: '50%'
-        }, 200);
+        }, 200, cpuTurn);
     }
 }
 
@@ -242,8 +278,6 @@ function displayOutcome(outcome) {
 }
 
 $(document).ready(function() {
-    console.log("JS Ready.");
-
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
 
@@ -260,13 +294,19 @@ $(document).ready(function() {
         }, 500);
 
         game.isSinglePlayer = !($('#isTwoPlayer').is(':checked'));
+        game.isPlayerOne = !($('#isPlayerO').is(':checked'));
         if (game.isSinglePlayer) {
-            $('#player-two-turn').text("CPU Turn");
+            if (game.isPlayerOne) {
+                $('#player-one-turn').text("Player Turn");
+                $('#player-two-turn').text("CPU Turn");
+            } else {
+                $('#player-one-turn').text("CPU Turn");
+                $('#player-two-turn').text("Player Turn");
+            }
         } else {
+            $('#player-one-turn').text("Player 1 Turn");
             $('#player-two-turn').text("Player 2 Turn");
         }
-
-        game.isPlayerOne = !($('#isPlayerO').is(':checked'));
 
         drawBoard();
         initializeBoard();
@@ -283,13 +323,9 @@ $(document).ready(function() {
         });
         $('#message-container').animate({
             top: '-50%'
-        }, 500);
-
-        for (var i = 0; i < 9; i++) {
-            var tile = "#tile-" + i;
-            $(tile).text("");
-        }
-        game.resetBoard();
+        }, 500, function() {
+            clearBoard();
+        });
     });
 
     $('#players').click(function() {
