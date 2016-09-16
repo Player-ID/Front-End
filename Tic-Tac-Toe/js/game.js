@@ -332,4 +332,20 @@ $(document).ready(function() {
         // Hide XO selection if in 2 player mode.
         $('#symbol-option').toggle(!($('#isTwoPlayer').is(':checked')));
     })
+
+    $('#reset').click(function() {
+        game.resetGame();
+        clearBoard();
+        showScore();
+
+        // Animate menu away and apply settings.
+        $('#settings-container').show();
+        $('#settings-container').animate({
+            opacity: 0.8
+        }, 500);
+
+        $('#settings').animate({
+            top: '50%'
+        }, 500);
+    });
 })
