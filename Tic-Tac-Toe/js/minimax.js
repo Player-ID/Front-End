@@ -20,11 +20,10 @@ function GameState(board, player, position, score) {
 function getBestMove(game, player) {
     alliance = player;
     var newGameState = new GameState(game, player, -1, 0);
-    return minimax(newGameState, 2, 0).position;
+    return minimax(newGameState, 2, 0, -11, 11).position;
 }
 
-//function minimax(game, depth, minGame, maxGame) {
-function minimax(game, depth, moveCount) {
+function minimax(game, depth, moveCount, min, max) {
     var moves = getAvailableMoves(game.board, game.player);
     if (depth === 0 || moves.length === 0) {
         // At leaf or root of tree. Return game state.
@@ -36,41 +35,39 @@ function minimax(game, depth, moveCount) {
     var bestGameState;
     if (alliance == game.player) {
         // Max Node
-        //var score = min;
-        var score = -100;
+        var score = min;
         for (var i = 0; i < moves.length; i++) {
             var newGameState = new GameState(game.board.slice(),
                     nextPlayer, moves[i], 0);
             newGameState.board[moves[i]] = game.player;
-            //var scoreAfter = minimax(newGameState, depth - 1, score, max).score;
-            var scoreAfter = minimax(newGameState, depth - 1, moveCount + 1).score;
+            var scoreAfter = minimax(newGameState, depth - 1, moveCount + 1,
+                    score, max).score;
             if (scoreAfter > score) {
                 score = scoreAfter;
                 bestGameState = newGameState;
                 bestGameState.score = score;    
             }
-            /*if (score > max) {
-                return max;
-            }*/
+            if (score > max) {
+                return bestGameState;
+            }
         }
     } else {
         // Min Node
-        //var score = max;
-        var score = 100;
+        var score = max;
         for (var i = 0; i < moves.length; i++) {
             var newGameState = new GameState(game.board.slice(),
                     nextPlayer, moves[i], 0);
             newGameState.board[moves[i]] = game.player;
-            //var scoreAfter = minimax(newGameState, depth - 1, min, score).score;
-            var scoreAfter = minimax(newGameState, depth - 1, moveCount + 1).score;
+            var scoreAfter = minimax(newGameState, depth - 1, moveCount + 1,
+                    min, score).score;
             if (scoreAfter < score) {
                 score = scoreAfter;
                 bestGameState = newGameState;
                 bestGameState.score = score;
             }
-            /*if (score < min) {
-                return min;
-            }*/
+            if (score < min) {
+                return bestGameState;
+            }
         }
     }
     return bestGameState;
