@@ -20,11 +20,6 @@ Simon Says Buttons
     width: 50%;
     height: 50%;
     border: 5px solid black;
-    z-index: 0;
-}
-
-.square:hover {
-    z-index: 20;
 }
 
 #green {
@@ -32,7 +27,11 @@ Simon Says Buttons
     border-color: #00ff00;
 }
 
-#green:hover {
+#green.on.highlight {
+    background-color: #00ff00;
+}
+
+#green.on:hover {
     box-shadow: inset 0px 0px 50px 10px rgba(0,85,0,1);
 }
 
@@ -41,7 +40,11 @@ Simon Says Buttons
     border-color: #ff0000;
 }
 
-#red:hover {
+#red.on.highlight {
+    background-color: #ff0000;
+}
+
+#red.on:hover {
     box-shadow: inset 0px 0px 50px 10px rgba(170,0,0,1);
 }
 
@@ -50,7 +53,11 @@ Simon Says Buttons
     border-color: #ffff00;
 }
 
-#yellow:hover {
+#yellow.on.highlight {
+    background-color: #ffff00;
+}
+
+#yellow.on:hover {
     box-shadow: inset 0px 0px 50px 10px rgba(238,238,0,1);
 }
 
@@ -59,7 +66,11 @@ Simon Says Buttons
     border-color: #0000ff;
 }
 
-#blue:hover {
+#blue.on.highlight {
+    background-color: #0000ff;
+}
+
+#blue.on:hover {
     box-shadow: inset 0px 0px 50px 10px rgba(0,0,136,1);
 }
 
@@ -168,9 +179,11 @@ input:checked + .toggle-button {
 }
 
 #score {
+    float: right;
     width: 80px;
     height: 70px;
     margin: 5px 0;
+    margin-right: 5px;
     background-color: #550000;
     border: 5px solid #222222;
     color: #ff0000;
@@ -185,11 +198,12 @@ Game Messages
 #message {
     display: block;
     position: absolute;
-    top: 0;
+    top: -100%;
     left: 50%;
     transform: translateX(-50%);
     background-color: white;
     padding: 10px 20px;
     font-size: 20px;
+    text-align: center;
     z-index: 5000;
 }
