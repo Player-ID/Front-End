@@ -8,90 +8,94 @@ var winningCombos = [
     [0, 4, 8],
     [2, 4, 6]
 ];
+const INVALID = -1;
 var alliance = "1";
+var board;
 
-function GameState(board, player, position, score) {
-    this.board = board;
-    this.player = player;
+function GameState(score, position) {
     this.position = position;
     this.score = score;
 }
 
 function getBestMove(game, player) {
     alliance = player;
-    var newGameState = new GameState(game, player, -1, 0);
-    return minimax(newGameState, 2, 0, -11, 11).position;
+    board = game.slice();
+    return minimax(9, player, 0, -100, 100).position;
 }
 
-function minimax(game, depth, moveCount, min, max) {
-    var moves = getAvailableMoves(game.board, game.player);
-    if (depth === 0 || moves.length === 0) {
-        // At leaf or root of tree. Return game state.
-        return new GameState(game.board, game.player, game.position,
-                getScore(game.board, moveCount));
+function minimax(depth, player, moveCount, min, max) {
+    var moves = getAvailableMoves(player);
+    if (checkWin(player)) {
+        return new GameState(getWinScore(player, moveCount), INVALID);
+    } else if (checkWin(getNextTurn(player))) {
+        return new GameState(getWinScore(getNextTurn(player), moveCount), INVALID);
+    } else if (depth === 0 || moves.length === 0) {
+        // At leaf or end of tree size.
+        return new GameState(0, INVALID);
     }
 
-    var nextPlayer = getNextTurn(game.player);
-    var bestGameState;
-    if (alliance == game.player) {
-        // Max Node
-        var score = min;
+    var score = (alliance == player) ? min : max;
+    var newScore;
+    var bestGameState = new GameState(score, INVALID);
+    if (alliance == player) {
+        // Max node
         for (var i = 0; i < moves.length; i++) {
-            var newGameState = new GameState(game.board.slice(),
-                    nextPlayer, moves[i], 0);
-            newGameState.board[moves[i]] = game.player;
-            var scoreAfter = minimax(newGameState, depth - 1, moveCount + 1,
-                    score, max).score;
-            if (scoreAfter > score) {
-                score = scoreAfter;
-                bestGameState = newGameState;
-                bestGameState.score = score;    
+            // Make Move
+            board[moves[i]] = player;
+
+            newScore = minimax(depth - 1, getNextTurn(player),
+                    moveCount + 1, bestGameState.score, max).score;
+            if (newScore > bestGameState.score) {
+                bestGameState.score = newScore;
+                bestGameState.position = moves[i];
             }
-            if (score > max) {
-                return bestGameState;
+            if (bestGameState.score > max) {
+                // Undo Move
+                board[moves[i]] = 0;
+                break;
             }
+
+            // Undo Move
+            board[moves[i]] = 0;
         }
     } else {
-        // Min Node
-        var score = max;
+        // Min node
         for (var i = 0; i < moves.length; i++) {
-            var newGameState = new GameState(game.board.slice(),
-                    nextPlayer, moves[i], 0);
-            newGameState.board[moves[i]] = game.player;
-            var scoreAfter = minimax(newGameState, depth - 1, moveCount + 1,
-                    min, score).score;
-            if (scoreAfter < score) {
-                score = scoreAfter;
-                bestGameState = newGameState;
-                bestGameState.score = score;
+            // Make Move
+            board[moves[i]] = player;
+
+            newScore = minimax(depth - 1, getNextTurn(player),
+                    moveCount + 1, min, bestGameState.score).score;
+            if (newScore < bestGameState.score) {
+                bestGameState.score = newScore;
+                bestGameState.position = moves[i];
             }
-            if (score < min) {
-                return bestGameState;
+            if (bestGameState.score < min) {
+                // Undo Move
+                board[moves[i]] = 0;
+                break;
             }
+
+            // Undo Move
+            board[moves[i]] = 0;
         }
     }
     return bestGameState;
 }
 
-function getScore(game, moves) {
-    if (checkWin(game, alliance)) {
-        return 10 - moves;
-    } else if (checkWin(game, getNextTurn(alliance))) {
-        return moves - 10;
-    } else {
-        return 0;
+function getWinScore(player, moveCount) {
+    if (checkWin(alliance)) {
+        return 10 - moveCount;
+    } else  {
+        return moveCount - 10;
     }
 }
 
-function getAvailableMoves(game, player) {
+function getAvailableMoves() {
     var available = [];
 
-    if (checkWin(game, player)) {
-        return available;
-    }
-
     for (var i = 0; i < 9; i++) {
-        if (game[i] === 0) {
+        if (board[i] === 0) {
             available.push(i);
         }
     }
@@ -106,11 +110,11 @@ function getNextTurn(currentTurn) {
     }
 }
 
-function checkWin(game, player) {
+function checkWin(player) {
     for (var i = 0; i < winningCombos.length; i++) {
         var lineCount = 0;
         for (var j = 0; j < winningCombos[i].length; j++) {
-            if (game[winningCombos[i][j]] == player) {
+            if (board[winningCombos[i][j]] == player) {
                 lineCount++;
             } else {
                 break;
