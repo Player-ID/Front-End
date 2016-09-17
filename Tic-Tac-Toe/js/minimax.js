@@ -35,20 +35,15 @@ function minimax(depth, player, moveCount, min, max) {
     }
 
     var score = (alliance == player) ? min : max;
+    var newScore;
     var bestGameState = new GameState(score, INVALID);
-    for (var i = 0; i < moves.length; i++) {
-        // Make Move
-        board[moves[i]] = player;
+    if (alliance == player) {
+        // Max node
+        for (var i = 0; i < moves.length; i++) {
+            // Make Move
+            board[moves[i]] = player;
 
-        // TODO: Maybe optimize?
-        // Writing the wrapping for loop inside the below if statements instead
-        // can be more efficient as the alliance checks are not run constantly
-        // but clutter the code.
-
-        // Calculate new score
-        if (alliance == player) {
-            // Max node
-            var newScore = minimax(depth - 1, getNextTurn(player),
+            newScore = minimax(depth - 1, getNextTurn(player),
                     moveCount + 1, bestGameState.score, max).score;
             if (newScore > bestGameState.score) {
                 bestGameState.score = newScore;
@@ -59,9 +54,17 @@ function minimax(depth, player, moveCount, min, max) {
                 board[moves[i]] = 0;
                 break;
             }
-        } else {
-            // Min node
-            var newScore = minimax(depth - 1, getNextTurn(player),
+
+            // Undo Move
+            board[moves[i]] = 0;
+        }
+    } else {
+        // Min node
+        for (var i = 0; i < moves.length; i++) {
+            // Make Move
+            board[moves[i]] = player;
+
+            newScore = minimax(depth - 1, getNextTurn(player),
                     moveCount + 1, min, bestGameState.score).score;
             if (newScore < bestGameState.score) {
                 bestGameState.score = newScore;
@@ -72,10 +75,10 @@ function minimax(depth, player, moveCount, min, max) {
                 board[moves[i]] = 0;
                 break;
             }
-        }
 
-        // Undo Move
-        board[moves[i]] = 0;
+            // Undo Move
+            board[moves[i]] = 0;
+        }
     }
     return bestGameState;
 }
