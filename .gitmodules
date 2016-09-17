@@ -1,0 +1,3 @@
+[submodule "libraries/howler.js"]
+	path = libraries/howler.js
+	url = https://github.com/goldfire/howler.js
