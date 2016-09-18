@@ -6,8 +6,11 @@ var game = {
 
     getNextColor : function() {
         lockClick = true;
-        var rand = Math.floor(Math.random() * 4);
-        this.order.push(this.convertToColor(rand));
+        if (this.order.length < 20) {
+            var rand = Math.floor(Math.random() * 4);
+            this.order.push(this.convertToColor(rand));
+        }
+        updateScore();
         playSequence();
     },
 
@@ -27,10 +30,12 @@ var game = {
     resetGame : function() {
         this.order = [];
         this.playerIndex = 0;
+        updateScore();
     }
 }
 const flashTime = 750;
 var sequenceHandler;
+var colorHandler;
 var sounds = {
     green : new Howl({
             src: ["https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"],
@@ -51,6 +56,7 @@ var sounds = {
 }
 
 function playSequence() {
+    game.lockClick = true;
     var i = 0;
     sequenceHandler = setInterval(function() {
         flashColor(game.order[i]);
@@ -63,13 +69,16 @@ function playSequence() {
 }
 
 function flashColor(color) {
-    var find = "#" + color;
-    $(find).addClass('highlight');
-    sounds[color].play();
-    setTimeout(function() {
-        sounds[color].stop();
-        $(find).removeClass('highlight');
-    }, flashTime);
+    if (sounds[color] !== undefined) {
+        var find = "#" + color;
+        $(find).addClass('highlight');
+        sounds[color].play();
+        colorHandler = setTimeout(function() {
+            sounds[color].stop();
+            $(find).removeClass('highlight');
+            clearInterval(colorHandler);
+        }, flashTime);
+    }
 }
 
 function notifyError() {
@@ -83,12 +92,31 @@ function notifyError() {
     showMessage(text);
 }
 
+function updateScore() {
+    if (game.order.length == 21) {
+        showMessage("You Win!!!");
+        game.resetGame();
+    }
+    $('#score').text(game.order.length);
+}
+
 function showMessage(text) {
     game.lockClick = true;
-    $('#message').text(text);
+    $('#message p').text(text);
     $('#message').animate({
         top : '0'
     }, 500);
+}
+
+function hideMessage() {
+    $('#message').animate({
+        top : '-100%'
+    }, 500);
+    if (game.order.length === 0) {
+        game.getNextColor();
+    } else if (!game.strictMode) {
+        game.lockClick = false;
+    }
 }
 
 function pickColor() {
@@ -97,36 +125,50 @@ function pickColor() {
         return;
     }
 
-    if (game.order[game.playerIndex] == $(this).attr('id')) {
-        // Correctly selected color
-        game.playerIndex++;
-        if (game.playerIndex >= game.order.length) {
-            // No more colors in sequence
+    game.lockClick = true;
+    var color = $(this).attr('id');
+    $(this).addClass('highlight');
+    sounds[color].play();
+    colorHandler = setInterval(function () {
+        sounds[color].stop();
+        $("#" + color).removeClass('highlight');
+        game.lockClick = false;
+        clearInterval(colorHandler);
+
+        if (game.order[game.playerIndex] == color) {
+            // Correctly selected color
+            game.playerIndex++;
+            if (game.playerIndex >= game.order.length) {
+                // No more colors in sequence
+                game.playerIndex = 0;
+                game.getNextColor();
+            }
+        } else {
+            // Incorrectly guessed color
+            notifyError();
             game.playerIndex = 0;
-            game.getNextColor();
+            if (game.strictMode) {
+                game.resetGame();
+            }
         }
-    } else {
-        // Incorrectly guessed color
-        notifyError();
-        if (game.strictMode) {
-            game.resetGame();
-        }
-    }
+    }, 500);
 }
 
 function togglePower() {
+    game.resetGame();
     if ($('#game-on').is(':checked')) {
         $('#green').addClass('on');
         $('#red').addClass('on');
         $('#yellow').addClass('on');
         $('#blue').addClass('on');
-        game.resetGame();
         game.getNextColor();
     } else {
         $('#green').removeClass('on');
         $('#red').removeClass('on');
         $('#yellow').removeClass('on');
         $('#blue').removeClass('on');
+        clearInterval(sequenceHandler);
+        clearInterval(colorHandler);
     }
 }
 
@@ -148,4 +190,6 @@ $(document).ready(function() {
     $('#red').click(pickColor);
     $('#yellow').click(pickColor);
     $('#blue').click(pickColor);
+
+    $('#continue').click(hideMessage);
 });

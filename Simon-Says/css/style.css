@@ -207,3 +207,20 @@ Game Messages
     text-align: center;
     z-index: 5000;
 }
+
+button {
+    background-color: #BBBBBB;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    width: 100%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+button:hover {
+    background-color: #888888;
+}
