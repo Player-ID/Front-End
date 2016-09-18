@@ -32,10 +32,22 @@ var game = {
 const flashTime = 750;
 var sequenceHandler;
 var sounds = {
-    green : "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3",
-    red : "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3",
-    yellow : "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3",
-    blue : "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3",
+    green : new Howl({
+            src: ["https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"],
+            html5: true
+        }),
+    red : new Howl({
+            src: ["https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"],
+            html5: true
+        }),
+    yellow : new Howl({
+            src: ["https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"],
+            html5: true
+        }),
+    blue : new Howl({
+            src: ["https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"],
+            html5: true
+        }),
 }
 
 function playSequence() {
@@ -47,15 +59,17 @@ function playSequence() {
           clearInterval(sequenceHandler);
           game.lockClick = false;
         }
-      }, flashTime);
+      }, flashTime + 250);
 }
 
 function flashColor(color) {
     var find = "#" + color;
     $(find).addClass('highlight');
+    sounds[color].play();
     setTimeout(function() {
+        sounds[color].stop();
         $(find).removeClass('highlight');
-    }, 1000);
+    }, flashTime);
 }
 
 function notifyError() {
@@ -83,7 +97,6 @@ function pickColor() {
         return;
     }
 
-    console.log($(this).attr('id'), game.order[game.playerIndex]);
     if (game.order[game.playerIndex] == $(this).attr('id')) {
         // Correctly selected color
         game.playerIndex++;
@@ -117,10 +130,20 @@ function togglePower() {
     }
 }
 
+function toggleStrict() {
+    if ($('#strict-mode').is(':checked')) {
+        game.strictMode = true;
+    } else {
+        game.strictMode = false;
+    }
+}
+
 $(document).ready(function() {
     togglePower();
-    $('.switch').click(togglePower);
+    toggleStrict();
 
+    $('.switch').click(togglePower);
+    $('.toggle').click(toggleStrict);
     $('#green').click(pickColor);
     $('#red').click(pickColor);
     $('#yellow').click(pickColor);
